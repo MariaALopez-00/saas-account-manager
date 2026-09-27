@@ -1,0 +1,211 @@
+/* =========================================================
+   ServiciosMAX — Estilos base
+   Diseño limpio y funcional, sin adornos innecesarios.
+
+   Paleta de colores:
+     #2A0F2F  morado muy oscuro   -> texto fuerte, cabecera, botón principal
+     #5C2A5F  morado medio        -> hover de botón principal, bordes de título
+     #C06C84  rosa envejecido     -> botón secundario, acentos
+     #F8B195  durazno claro       -> encabezados de tabla, bordes suaves
+     #FBE9E7  rosa muy pálido     -> fondo general y de tarjetas
+   ========================================================= */
+
+:root {
+  --color-morado-oscuro: #2A0F2F; /* color de mayor contraste, usar con moderación */
+  --color-morado-medio: #5C2A5F;
+  --color-rosa: #C06C84;
+  --color-durazno: #F8B195;
+  --color-rosa-palido: #FBE9E7; /* casi blanco, para fondos grandes */
+}
+
+* {
+  box-sizing: border-box; /* el padding y el borde no aumentan el ancho/alto declarado */
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-morado-oscuro);
+  background-color: var(--color-rosa-palido);
+}
+
+/* ---------- Cabecera ---------- */
+
+.cabecera {
+  background-color: var(--color-morado-oscuro);
+  color: #ffffff;
+  padding: 24px 32px;
+}
+
+.cabecera h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.subtitulo {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  color: var(--color-durazno);
+}
+
+/* ---------- Contenedor general ---------- */
+
+.contenedor {
+  max-width: 900px; /* limita el ancho en pantallas grandes */
+  margin: 24px auto; /* centra el contenido horizontalmente */
+  padding: 0 16px 48px 16px;
+}
+
+/* ---------- Secciones ---------- */
+
+.seccion {
+  background-color: #ffffff; /* contraste con el fondo rosa pálido del body */
+  border: 1px solid var(--color-durazno);
+  border-radius: 4px;
+  padding: 20px 24px;
+  margin-bottom: 24px; /* separación visual entre las 4 secciones */
+}
+
+.seccion h2 {
+  margin-top: 0;
+  font-size: 18px;
+  color: var(--color-morado-oscuro);
+  border-bottom: 2px solid var(--color-morado-medio);
+  padding-bottom: 8px;
+}
+
+/* ---------- Formularios ---------- */
+
+.formulario {
+  display: flex;
+  flex-wrap: wrap; /* permite que los campos bajen de línea en pantallas angostas */
+  gap: 16px;
+  align-items: flex-end; /* alinea los botones con la base de los inputs */
+}
+
+.campo {
+  display: flex;
+  flex-direction: column; /* label arriba, input abajo */
+  gap: 4px;
+}
+
+.campo label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.campo input,
+.campo select {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid var(--color-rosa);
+  border-radius: 3px;
+  min-width: 200px;
+  color: var(--color-morado-oscuro);
+  background-color: #ffffff;
+}
+
+.campo input:focus,
+.campo select:focus {
+  outline: 2px solid var(--color-morado-medio); /* accesibilidad: se nota claramente el foco del teclado */
+  outline-offset: 1px;
+}
+
+/* ---------- Botones ---------- */
+
+button {
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: var(--color-morado-medio); /* botón principal de cada sección */
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--color-morado-oscuro);
+}
+
+button:disabled {
+  background-color: #c9b6cb; /* tono apagado para indicar que está deshabilitado */
+  cursor: not-allowed;
+}
+
+button.boton-secundario {
+  background-color: var(--color-rosa); /* usado en "Marcar como cobrado" */
+}
+
+button.boton-secundario:hover:not(:disabled) {
+  background-color: var(--color-morado-medio);
+}
+
+/* ---------- Áreas de mensajes ---------- */
+
+.area-mensaje {
+  margin-top: 12px;
+  min-height: 20px; /* evita que el layout salte cuando aparece/desaparece el mensaje */
+  font-size: 14px;
+}
+
+.area-mensaje.exito {
+  color: #1e6b1e; /* verde: se mantiene fuera de la paleta por ser un color semántico universal */
+}
+
+.area-mensaje.error {
+  color: #b30000; /* rojo: igual que arriba, se prioriza la claridad del mensaje */
+}
+
+/* ---------- Tablas ---------- */
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse; /* evita el doble borde entre celdas */
+  margin-top: 16px;
+}
+
+.tabla th,
+.tabla td {
+  border: 1px solid var(--color-durazno);
+  padding: 8px 10px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.tabla th {
+  background-color: var(--color-durazno);
+  color: var(--color-morado-oscuro);
+}
+
+.tabla tbody tr:nth-child(even) {
+  background-color: var(--color-rosa-palido); /* rayado sutil para facilitar la lectura de filas */
+}
+
+/* ---------- Total de pagos ---------- */
+
+.total-pagos {
+  margin-top: 16px;
+  padding: 16px;
+  background-color: var(--color-rosa-palido);
+  border: 1px solid var(--color-rosa);
+  border-radius: 4px;
+}
+
+.total-pagos.oculto {
+  display: none; /* clase controlada desde main.js para mostrar/ocultar el total */
+}
+
+.total-pagos-etiqueta {
+  font-size: 14px;
+  margin-right: 8px;
+  color: var(--color-morado-oscuro);
+}
+
+.total-pagos-monto {
+  font-size: 28px; /* tamaño grande, tal como pide el requerimiento */
+  font-weight: bold;
+  color: var(--color-morado-oscuro);
+}

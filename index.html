@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ServiciosMAX — Control de Ingresos</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="cabecera">
+    <h1>ServiciosMAX</h1>
+    <p class="subtitulo">Panel de control de ingresos</p>
+  </header>
+
+  <main class="contenedor">
+
+    <!-- ===================================================== -->
+    <!-- SECCIÓN 1: Registrar empresa                           -->
+    <!-- ===================================================== -->
+    <section class="seccion" id="seccion-registrar">
+      <h2>1. Registrar empresa</h2>
+
+      <form id="form-registrar-empresa" class="formulario"> <!-- el submit se maneja en main.js, no hay action/method aquí -->
+        <div class="campo">
+          <label for="input-nombre-empresa">Nombre</label>
+          <input type="text" id="input-nombre-empresa" name="nombre" required />
+        </div>
+
+        <div class="campo">
+          <label for="input-nit-empresa">NIT</label>
+          <input type="text" id="input-nit-empresa" name="nit" required />
+        </div>
+
+        <button type="submit" id="boton-guardar-empresa">Guardar Empresa</button>
+      </form>
+
+      <!-- Área donde se muestran mensajes de confirmación o error de esta sección -->
+      <div id="mensaje-registrar-empresa" class="area-mensaje" role="status"></div> <!-- role="status" para lectores de pantalla -->
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SECCIÓN 2: Listar empresas                             -->
+    <!-- ===================================================== -->
+    <section class="seccion" id="seccion-listar">
+      <h2>2. Listar empresas</h2>
+
+      <button type="button" id="boton-actualizar-lista">Actualizar lista</button> <!-- type="button" evita que envíe algún formulario -->
+
+      <div class="area-mensaje" id="mensaje-listar-empresas" role="status"></div>
+
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>NIT</th>
+            <th>Tipo de Contrato</th>
+            <th>Pago Único Cobrado</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpo-tabla-empresas">
+          <!-- Las filas se generan dinámicamente desde main.js -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SECCIÓN 3: Asignar contrato                            -->
+    <!-- ===================================================== -->
+    <section class="seccion" id="seccion-asignar">
+      <h2>3. Asignar contrato</h2>
+
+      <form id="form-asignar-contrato" class="formulario">
+        <div class="campo">
+          <label for="select-empresa">Empresa</label>
+          <select id="select-empresa" required> <!-- se llena dinámicamente al cargar la página -->
+            <option value="">-- Seleccione una empresa --</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="select-contrato">Tipo de contrato</label>
+          <select id="select-contrato" required> <!-- value = id del contrato, texto = nombre -->
+            <option value="">-- Seleccione un contrato --</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="input-fecha-inicio">Fecha de inicio</label>
+          <input type="date" id="input-fecha-inicio" required /> <!-- entrega el valor ya en formato YYYY-MM-DD -->
+        </div>
+
+        <button type="submit" id="boton-asignar-contrato">Asignar contrato</button>
+      </form>
+
+      <!-- Área donde se muestran mensajes de confirmación o error de esta sección -->
+      <div id="mensaje-asignar-contrato" class="area-mensaje" role="status"></div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SECCIÓN 4: Calcular pagos del mes                      -->
+    <!-- ===================================================== -->
+    <section class="seccion" id="seccion-pagos">
+      <h2>4. Calcular pagos del mes</h2>
+
+      <button type="button" id="boton-calcular-pagos">Calcular pagos del mes</button>
+
+      <div class="area-mensaje" id="mensaje-calcular-pagos" role="status"></div>
+
+      <div id="total-pagos-contenedor" class="total-pagos oculto"> <!-- clase "oculto" hasta que se calcule el primer total -->
+        <span class="total-pagos-etiqueta">Total del mes:</span>
+        <span id="total-pagos-monto" class="total-pagos-monto">Q0.00</span>
+      </div>
+
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>Empresa</th>
+            <th>Tipo de Contrato</th>
+            <th>Monto</th>
+            <th>Acción</th> <!-- aquí aparece el botón "Marcar como cobrado" cuando corresponde -->
+          </tr>
+        </thead>
+        <tbody id="cuerpo-tabla-desglose">
+          <!-- Las filas del desglose se generan dinámicamente desde main.js -->
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <script src="main.js"></script> <!-- se carga al final del body para asegurar que el DOM ya existe -->
+</body>
+</html>
